@@ -113,11 +113,7 @@ export default function About() {
             </div>
 
             <a
-              href="#team"
-              onClick={(e) => {
-                e.preventDefault()
-                document.getElementById('team')?.scrollIntoView({ behavior: 'smooth' })
-              }}
+              href="/about#team"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-sky-500 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-blue-200 hover:-translate-y-0.5 transition-all duration-200"
             >
               Meet Our Team
