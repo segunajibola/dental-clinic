@@ -1,7 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import {
   ShieldCheck,
@@ -17,43 +16,43 @@ import {
 const reasons = [
   {
     icon: ShieldCheck,
-    title: 'Certified & Accredited',
-    description: 'Fully registered with the Nigerian Dental Association with internationally trained dentists.',
+    title: 'NDA Certified',
+    description: 'Fully registered with the Nigerian Dental Association with internationally trained professionals.',
     color: 'text-blue-600',
     bg: 'bg-blue-50',
   },
   {
     icon: HeartPulse,
     title: 'Pain-Free Experience',
-    description: 'We use advanced anaesthesia techniques and sedation for a comfortable, anxiety-free visit.',
+    description: 'We use advanced anaesthesia and modern techniques for a comfortable, anxiety-free visit.',
     color: 'text-rose-500',
     bg: 'bg-rose-50',
   },
   {
     icon: Stethoscope,
     title: 'Latest Technology',
-    description: 'Digital X-rays, 3D scanning, laser dentistry and the most modern dental equipment in Lagos.',
+    description: 'Digital X-rays, laser dentistry, and state-of-the-art dental equipment.',
     color: 'text-sky-600',
     bg: 'bg-sky-50',
   },
   {
     icon: Award,
-    title: 'Award-Winning Care',
-    description: 'Recognized as one of the top dental clinics in Lagos for 3 consecutive years.',
+    title: 'Proven Excellence',
+    description: 'Recognised as one of the most trusted dental clinics in Lekki since 2016.',
     color: 'text-amber-500',
     bg: 'bg-amber-50',
   },
   {
     icon: Users,
     title: 'Expert Dental Team',
-    description: '15+ experienced dentists and dental hygienists dedicated to your oral health.',
+    description: 'Highly trained dentists and hygienists dedicated to your oral health and comfort.',
     color: 'text-purple-600',
     bg: 'bg-purple-50',
   },
   {
     icon: Clock,
     title: 'Flexible Hours',
-    description: 'Open 7 days a week, including weekends and evenings, to fit your busy schedule.',
+    description: 'Open 7 days a week at both our Oniru and Chevron branches for your convenience.',
     color: 'text-green-600',
     bg: 'bg-green-50',
   },
@@ -63,9 +62,9 @@ const highlights = [
   'Over 5,000 patients treated',
   'Same-day emergency appointments',
   'Child-friendly environment',
-  'Flexible payment & HMO accepted',
-  'Sterile, state-of-the-art facility',
-  'Post-treatment follow-up care',
+  'HMO accepted & flexible payment',
+  'Sterile, modern facilities',
+  'Two convenient Lekki branches',
 ]
 
 export default function About() {
@@ -75,7 +74,6 @@ export default function About() {
   return (
     <section id="about" className="py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top: heading + highlights */}
         <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
           {/* Left */}
           <motion.div
@@ -85,26 +83,27 @@ export default function About() {
             transition={{ duration: 0.7 }}
           >
             <span className="inline-block bg-blue-50 text-blue-600 text-sm font-semibold px-4 py-2 rounded-full mb-4 uppercase tracking-wider">
-              About SmileCraft
+              About Us
             </span>
             <h2 className="text-4xl sm:text-5xl font-black text-slate-900 mb-6 leading-tight">
-              Why Thousands Choose{' '}
+              Why Lagos Chooses{' '}
               <span className="bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
-                SmileCraft
+                All Smiles
               </span>
             </h2>
-            <p className="text-slate-500 text-lg leading-relaxed mb-6">
-              Since 2012, SmileCraft Dental Clinic has been the trusted choice for premium dental
-              care in Lekki, Lagos. We combine cutting-edge technology with compassionate care to
-              deliver exceptional results — every single time.
+            <p className="text-slate-500 text-lg leading-relaxed mb-4">
+              Established in 2016, All Smiles Dental Clinic is a world-class dental facility
+              located in Lagos, delivering exceptional oral healthcare with a focus on comfort,
+              precision, and results.
             </p>
             <p className="text-slate-500 leading-relaxed mb-8">
-              Our team of internationally trained dentists is committed to helping you achieve
-              optimal oral health and a smile you are proud to show off.
+              Our team of highly trained dental professionals is dedicated to helping every patient
+              achieve a confident, healthy smile using modern techniques and advanced equipment.
+              Designed for professionals, high-net-worth individuals, and anyone seeking premium
+              dental care in Lekki.
             </p>
 
-            {/* Highlight list */}
-            <div className="grid sm:grid-cols-2 gap-3">
+            <div className="grid sm:grid-cols-2 gap-3 mb-8">
               {highlights.map((item) => (
                 <div key={item} className="flex items-center gap-2 text-slate-700 text-sm">
                   <CheckCircle2 className="w-4 h-4 text-blue-600 flex-shrink-0" />
@@ -114,10 +113,14 @@ export default function About() {
             </div>
 
             <a
-              href="#booking"
-              className="inline-flex items-center gap-2 mt-8 bg-gradient-to-r from-blue-600 to-sky-500 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-blue-200 hover:-translate-y-0.5 transition-all duration-200"
+              href="#team"
+              onClick={(e) => {
+                e.preventDefault()
+                document.getElementById('team')?.scrollIntoView({ behavior: 'smooth' })
+              }}
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-sky-500 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-blue-200 hover:-translate-y-0.5 transition-all duration-200"
             >
-              Meet Our Dentists
+              Meet Our Team
             </a>
           </motion.div>
 
@@ -131,12 +134,15 @@ export default function About() {
             <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-blue-600 to-sky-500 p-8 shadow-2xl">
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { value: '12+', label: 'Years in Practice', icon: Star },
+                  { value: '2016', label: 'Est. Year', icon: Star },
                   { value: '5,000+', label: 'Happy Smiles', icon: Users },
-                  { value: '15+', label: 'Specialists', icon: Stethoscope },
+                  { value: '2', label: 'Branches', icon: Stethoscope },
                   { value: '98%', label: 'Success Rate', icon: Award },
                 ].map(({ value, label, icon: Icon }) => (
-                  <div key={label} className="bg-white/15 backdrop-blur-sm rounded-2xl p-5 text-white text-center">
+                  <div
+                    key={label}
+                    className="bg-white/15 backdrop-blur-sm rounded-2xl p-5 text-white text-center"
+                  >
                     <Icon className="w-6 h-6 mx-auto mb-2 text-sky-200" />
                     <div className="text-3xl font-black mb-1">{value}</div>
                     <div className="text-blue-100 text-sm">{label}</div>
@@ -145,8 +151,10 @@ export default function About() {
               </div>
 
               <div className="mt-6 bg-white/15 rounded-2xl p-5 text-center text-white">
-                <p className="text-lg font-semibold">"Your smile is our greatest achievement."</p>
-                <p className="text-blue-200 text-sm mt-1">— Dr. Adewale Okonkwo, Chief Dentist</p>
+                <p className="text-lg font-semibold">
+                  "Putting a Smile on your Face — every single visit."
+                </p>
+                <p className="text-blue-200 text-sm mt-1">— All Smiles Dental Clinic</p>
               </div>
             </div>
 
@@ -180,7 +188,9 @@ export default function About() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="group bg-slate-50 hover:bg-white rounded-2xl p-6 border border-slate-100 hover:border-blue-100 hover:shadow-xl transition-all duration-300"
             >
-              <div className={`w-12 h-12 ${reason.bg} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+              <div
+                className={`w-12 h-12 ${reason.bg} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}
+              >
                 <reason.icon className={`w-6 h-6 ${reason.color}`} />
               </div>
               <h3 className="font-bold text-slate-900 mb-2">{reason.title}</h3>

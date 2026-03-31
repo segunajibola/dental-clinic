@@ -1,41 +1,50 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Twitter } from 'lucide-react'
+
+const WA_NUMBER = '2348183088375'
 
 const contactInfo = [
   {
     icon: MapPin,
-    title: 'Our Location',
-    lines: ['12 Admiralty Way, Lekki Phase 1', 'Lagos, Nigeria'],
+    title: 'Oniru Branch',
+    lines: ['7 T.K Kuboye Street, Oniru', 'Lekki, Lagos, Nigeria'],
     color: 'text-blue-600',
     bg: 'bg-blue-50',
-    link: 'https://maps.google.com/?q=Lekki+Phase+1+Lagos',
+    link: 'https://maps.google.com/?q=7+TK+Kuboye+Street+Oniru+Lekki+Lagos',
+  },
+  {
+    icon: MapPin,
+    title: 'Chevron Branch',
+    lines: ['Talea Mall, Chevron Drive', '(Before UBA Bank), Lagos'],
+    color: 'text-purple-600',
+    bg: 'bg-purple-50',
+    link: 'https://maps.google.com/?q=Talea+Mall+Chevron+Drive+Lekki+Lagos',
   },
   {
     icon: Phone,
     title: 'Call / WhatsApp',
-    lines: ['+234 810 000 0000', '+234 701 000 0000'],
+    lines: ['09169892921', '08183083375'],
     color: 'text-green-600',
     bg: 'bg-green-50',
-    link: 'tel:+2348100000000',
+    link: 'tel:+2349169892921',
   },
   {
     icon: Mail,
     title: 'Email Us',
-    lines: ['hello@smilecraftdental.ng', 'info@smilecraftdental.ng'],
-    color: 'text-purple-600',
-    bg: 'bg-purple-50',
-    link: 'mailto:hello@smilecraftdental.ng',
+    lines: ['ifeosho22@gmail.com'],
+    color: 'text-amber-600',
+    bg: 'bg-amber-50',
+    link: 'mailto:ifeosho22@gmail.com',
   },
   {
     icon: Clock,
     title: 'Working Hours',
-    lines: ['Mon – Fri: 8:00 AM – 7:00 PM', 'Sat – Sun: 9:00 AM – 5:00 PM'],
-    color: 'text-amber-600',
-    bg: 'bg-amber-50',
+    lines: ['Oniru: Mon–Fri 9am–6pm, Sat 9am–3pm', 'Chevron: Mon–Sun 9am–8pm'],
+    color: 'text-sky-600',
+    bg: 'bg-sky-50',
     link: null,
   },
 ]
@@ -51,9 +60,8 @@ export default function Contact() {
   const isInView = useInView(ref, { once: true })
 
   return (
-    <section id="contact" className="py-24 bg-white">
+    <section id="contact" className="py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
@@ -62,33 +70,32 @@ export default function Contact() {
           className="text-center mb-14"
         >
           <span className="inline-block bg-blue-50 text-blue-600 text-sm font-semibold px-4 py-2 rounded-full mb-4 uppercase tracking-wider">
-            Contact & Location
+            Contact Us
           </span>
           <h2 className="text-4xl sm:text-5xl font-black text-slate-900 mb-4">
-            Find Us in{' '}
+            Get in Touch with{' '}
             <span className="bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
-              Lekki, Lagos
+              All Smiles
             </span>
           </h2>
           <p className="text-slate-500 text-lg max-w-xl mx-auto">
-            We are conveniently located in Lekki Phase 1, easily accessible from VI, Ajah, and
-            Chevron. Walk-ins welcome.
+            We are always happy to hear from you. Reach us via phone, WhatsApp, email, or walk into
+            either of our two Lekki branches.
           </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Left — contact cards + map */}
-          <div className="space-y-6">
-            {/* Contact info grid */}
-            <div className="grid sm:grid-cols-2 gap-4">
+          {/* Left — contact grid */}
+          <div>
+            <div className="grid sm:grid-cols-2 gap-4 mb-6">
               {contactInfo.map(({ icon: Icon, title, lines, color, bg, link }, i) => (
                 <motion.div
                   key={title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.1 }}
-                  className={`bg-slate-50 rounded-2xl p-5 border border-slate-100 hover:shadow-md transition-shadow ${link ? 'cursor-pointer' : ''}`}
+                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                  className={`bg-white rounded-2xl p-5 border border-slate-100 hover:shadow-md transition-shadow ${link ? 'cursor-pointer' : ''}`}
                   onClick={() => link && window.open(link, '_blank')}
                 >
                   <div className={`w-10 h-10 ${bg} rounded-xl flex items-center justify-center mb-3`}>
@@ -102,28 +109,28 @@ export default function Contact() {
               ))}
             </div>
 
-            {/* Map placeholder */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="rounded-3xl overflow-hidden border border-slate-200 shadow-sm"
-            >
-              <iframe
-                title="SmileCraft Dental Clinic Location - Lekki Phase 1 Lagos"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.7242083339776!2d3.4663!3d6.4360!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMjYnMDkuNiJOIDPCsDI3JzU4LjciRQ!5e0!3m2!1sen!2sng!4v1620000000000!5m2!1sen!2sng"
-                width="100%"
-                height="280"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </motion.div>
+            {/* Social */}
+            <div className="bg-white rounded-2xl p-5 border border-slate-100">
+              <h4 className="font-semibold text-slate-900 text-sm mb-3">Follow Us</h4>
+              <p className="text-slate-400 text-sm mb-4">
+                See patient transformations, tips, and clinic updates on social media.
+              </p>
+              <div className="flex gap-3">
+                {socials.map(({ icon: Icon, label, color, href }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    aria-label={label}
+                    className={`w-10 h-10 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-center text-slate-500 ${color} hover:border-slate-300 hover:shadow-sm transition-all`}
+                  >
+                    <Icon className="w-4 h-4" />
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* Right — CTA + social */}
+          {/* Right — CTAs */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -131,7 +138,7 @@ export default function Contact() {
             transition={{ duration: 0.7 }}
             className="space-y-6"
           >
-            {/* Emergency card */}
+            {/* Emergency */}
             <div className="bg-gradient-to-br from-red-500 to-rose-600 rounded-3xl p-6 text-white">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -140,28 +147,28 @@ export default function Contact() {
                 <div>
                   <h3 className="font-black text-xl mb-1">Dental Emergency?</h3>
                   <p className="text-rose-100 text-sm mb-4">
-                    We offer same-day emergency dental appointments. Call us immediately and we
-                    will see you as soon as possible.
+                    Same-day emergency appointments available. Call us immediately and we will
+                    see you as soon as possible.
                   </p>
                   <a
-                    href="tel:+2348100000000"
+                    href="tel:+2349169892921"
                     className="inline-flex items-center gap-2 bg-white text-red-600 font-bold px-5 py-2.5 rounded-xl hover:bg-red-50 transition-colors text-sm"
                   >
                     <Phone className="w-4 h-4" />
-                    Call Now: +234 810 000 0000
+                    Call Now: 09169892921
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* WhatsApp CTA */}
+            {/* WhatsApp */}
             <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-3xl p-6 text-white">
               <h3 className="font-black text-xl mb-2">Quick WhatsApp Booking</h3>
               <p className="text-green-100 text-sm mb-4">
-                Get an instant response. Message us on WhatsApp and book your appointment in minutes.
+                Message us on WhatsApp for an instant response. Book your appointment in minutes.
               </p>
               <a
-                href={`https://wa.me/2348100000000?text=${encodeURIComponent('Hello SmileCraft! I would like to book an appointment.')}`}
+                href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hello All Smiles Dental Clinic! I would like to book an appointment.')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-white text-green-600 font-bold px-5 py-2.5 rounded-xl hover:bg-green-50 transition-colors text-sm"
@@ -173,33 +180,15 @@ export default function Contact() {
               </a>
             </div>
 
-            {/* Follow us */}
-            <div className="bg-slate-50 border border-slate-100 rounded-3xl p-6">
-              <h3 className="font-bold text-slate-900 mb-3">Follow Us Online</h3>
-              <p className="text-slate-500 text-sm mb-4">
-                See our latest work, patient transformations, and dental tips on social media.
-              </p>
-              <div className="flex gap-3">
-                {socials.map(({ icon: Icon, label, color, href }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    aria-label={label}
-                    className={`w-10 h-10 bg-white rounded-xl border border-slate-200 flex items-center justify-center text-slate-500 ${color} hover:border-slate-300 hover:shadow-sm transition-all`}
-                  >
-                    <Icon className="w-4 h-4" />
-                  </a>
-                ))}
+            {/* Tagline card */}
+            <div className="bg-gradient-to-br from-blue-600 to-sky-500 rounded-3xl p-6 text-white text-center">
+              <p className="text-2xl font-black mb-2">"Putting a Smile on your Face"</p>
+              <p className="text-blue-100 text-sm">— All Smiles Dental Clinic, Est. 2016</p>
+              <div className="flex justify-center gap-2 mt-4">
+                <span className="w-2 h-2 bg-white/60 rounded-full" />
+                <span className="w-2 h-2 bg-white rounded-full" />
+                <span className="w-2 h-2 bg-white/60 rounded-full" />
               </div>
-            </div>
-
-            {/* Directions note */}
-            <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4">
-              <p className="text-blue-800 text-sm font-medium mb-1">📍 Getting Here</p>
-              <p className="text-blue-600 text-sm">
-                Located on Admiralty Way, Lekki Phase 1 — close to 1st Roundabout. Easily
-                accessible from Victoria Island, Ajah, and Chevron. Free parking available.
-              </p>
             </div>
           </motion.div>
         </div>

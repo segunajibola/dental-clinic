@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef } from 'react'
-import { Calendar, Phone, User, Stethoscope, CheckCircle, MessageCircle } from 'lucide-react'
+import { useState, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { Calendar, Phone, User, Stethoscope, CheckCircle, MessageCircle, MapPin } from 'lucide-react'
 
-const services = [
+const WA_NUMBER = '2348183088375'
+
+const servicesList = [
   'Teeth Whitening',
   'Scaling & Polishing',
   'Tooth-Colored Filling',
@@ -18,6 +18,8 @@ const services = [
   'Braces',
   'Invisalign Veneers',
   'Snap-on Veneers',
+  'Routine Extraction',
+  'Surgical Extraction',
   'Free Consultation',
   'Emergency Dental Care',
 ]
@@ -28,16 +30,17 @@ const timeSlots = [
   '4:00 PM', '5:00 PM', '6:00 PM',
 ]
 
+const branches = ['Oniru (Lekki)', 'Chevron']
+
 interface FormData {
   name: string
   phone: string
   service: string
+  branch: string
   date: string
   time: string
   message: string
 }
-
-const WHATSAPP_NUMBER = '2348100000000'
 
 export default function BookingForm() {
   const ref = useRef(null)
@@ -46,6 +49,7 @@ export default function BookingForm() {
     name: '',
     phone: '',
     service: '',
+    branch: '',
     date: '',
     time: '',
     message: '',
@@ -83,12 +87,12 @@ export default function BookingForm() {
     }
     setLoading(true)
 
-    // Build WhatsApp message
     const msg = encodeURIComponent(
-      `Hello SmileCraft! I would like to book an appointment.\n\n` +
+      `Hello All Smiles Dental Clinic! I would like to book an appointment.\n\n` +
         `👤 Name: ${form.name}\n` +
         `📞 Phone: ${form.phone}\n` +
         `🦷 Service: ${form.service}\n` +
+        `📍 Branch: ${form.branch || 'Any branch'}\n` +
         `📅 Date: ${form.date}${form.time ? ` at ${form.time}` : ''}\n` +
         `${form.message ? `💬 Notes: ${form.message}` : ''}\n\n` +
         `Please confirm my appointment. Thank you!`
@@ -97,14 +101,17 @@ export default function BookingForm() {
     setTimeout(() => {
       setLoading(false)
       setSubmitted(true)
-      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank')
+      window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank')
     }, 800)
   }
 
   const today = new Date().toISOString().split('T')[0]
 
   return (
-    <section id="booking" className="py-24 bg-gradient-to-br from-blue-600 via-blue-700 to-slate-900">
+    <section
+      id="booking"
+      className="py-24 bg-gradient-to-br from-blue-600 via-blue-700 to-slate-900"
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-14 items-start">
           {/* Left — info */}
@@ -121,15 +128,26 @@ export default function BookingForm() {
               Ready for Your Perfect Smile?
             </h2>
             <p className="text-blue-100 text-lg leading-relaxed mb-8">
-              Fill out the form and we will reach out within minutes to confirm your appointment.
-              Or book directly via WhatsApp for instant confirmation.
+              Fill in the form and we will reach out within minutes. Or book instantly via
+              WhatsApp — available at both our Oniru and Chevron branches.
             </p>
 
-            {/* Steps */}
             {[
-              { step: '01', title: 'Fill the Form', desc: 'Enter your name, phone, service and preferred date.' },
-              { step: '02', title: 'We Confirm', desc: 'Our team will call or WhatsApp you within 30 minutes.' },
-              { step: '03', title: 'Come In & Smile', desc: 'Visit us at our Lekki clinic for your treatment.' },
+              {
+                step: '01',
+                title: 'Fill the Form',
+                desc: 'Enter your name, phone, service, branch and preferred date.',
+              },
+              {
+                step: '02',
+                title: 'We Confirm',
+                desc: 'Our team will call or WhatsApp you within 30 minutes.',
+              },
+              {
+                step: '03',
+                title: 'Come In & Smile',
+                desc: 'Visit your chosen branch for a comfortable, professional treatment.',
+              },
             ].map(({ step, title, desc }) => (
               <div key={step} className="flex gap-4 mb-6">
                 <div className="w-10 h-10 rounded-full bg-white/15 border border-white/20 flex items-center justify-center text-sky-300 font-black text-sm flex-shrink-0">
@@ -142,12 +160,30 @@ export default function BookingForm() {
               </div>
             ))}
 
-            {/* WhatsApp direct button */}
+            {/* Branch indicators */}
+            <div className="grid grid-cols-2 gap-3 mb-6">
+              {[
+                { branch: 'Oniru Branch', area: 'Lekki Phase 1' },
+                { branch: 'Chevron Branch', area: 'Chevron Drive, Lekki' },
+              ].map(({ branch, area }) => (
+                <div
+                  key={branch}
+                  className="flex items-center gap-2 bg-white/10 border border-white/20 rounded-xl p-3"
+                >
+                  <MapPin className="w-4 h-4 text-sky-300 flex-shrink-0" />
+                  <div>
+                    <div className="text-white text-xs font-semibold">{branch}</div>
+                    <div className="text-blue-200 text-xs">{area}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
             <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello SmileCraft! I would like to book a dental appointment.')}`}
+              href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hello All Smiles Dental Clinic! I would like to book a dental appointment.')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition-all duration-200 hover:-translate-y-0.5 mt-2"
+              className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition-all duration-200 hover:-translate-y-0.5"
             >
               <MessageCircle className="w-5 h-5" />
               Book Directly via WhatsApp
@@ -178,7 +214,10 @@ export default function BookingForm() {
                   <button
                     onClick={() => {
                       setSubmitted(false)
-                      setForm({ name: '', phone: '', service: '', date: '', time: '', message: '' })
+                      setForm({
+                        name: '', phone: '', service: '', branch: '',
+                        date: '', time: '', message: '',
+                      })
                     }}
                     className="text-blue-600 font-medium hover:underline text-sm"
                   >
@@ -186,17 +225,13 @@ export default function BookingForm() {
                   </button>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-                  <h3 className="text-xl font-black text-slate-900 mb-2">Book Your Appointment</h3>
-                  <p className="text-slate-400 text-sm mb-5">
-                    All fields marked with * are required.
-                  </p>
+                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                  <h3 className="text-xl font-black text-slate-900 mb-1">Book Your Appointment</h3>
+                  <p className="text-slate-400 text-sm mb-4">Fields marked * are required.</p>
 
                   {/* Name */}
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                      Full Name *
-                    </label>
+                    <label className="block text-sm font-medium text-slate-700 mb-1.5">Full Name *</label>
                     <div className="relative">
                       <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                       <input
@@ -215,9 +250,7 @@ export default function BookingForm() {
 
                   {/* Phone */}
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                      Phone Number *
-                    </label>
+                    <label className="block text-sm font-medium text-slate-700 mb-1.5">Phone Number *</label>
                     <div className="relative">
                       <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                       <input
@@ -236,9 +269,7 @@ export default function BookingForm() {
 
                   {/* Service */}
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                      Service Required *
-                    </label>
+                    <label className="block text-sm font-medium text-slate-700 mb-1.5">Service Required *</label>
                     <div className="relative">
                       <Stethoscope className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
                       <select
@@ -250,7 +281,7 @@ export default function BookingForm() {
                         }`}
                       >
                         <option value="">Select a service...</option>
-                        {services.map((s) => (
+                        {servicesList.map((s) => (
                           <option key={s} value={s}>{s}</option>
                         ))}
                       </select>
@@ -258,12 +289,29 @@ export default function BookingForm() {
                     {errors.service && <p className="text-red-500 text-xs mt-1">{errors.service}</p>}
                   </div>
 
+                  {/* Branch */}
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1.5">Preferred Branch</label>
+                    <div className="relative">
+                      <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                      <select
+                        name="branch"
+                        value={form.branch}
+                        onChange={handleChange}
+                        className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm outline-none appearance-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white"
+                      >
+                        <option value="">Any branch</option>
+                        {branches.map((b) => (
+                          <option key={b} value={b}>{b}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
                   {/* Date & Time */}
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                        Preferred Date *
-                      </label>
+                      <label className="block text-sm font-medium text-slate-700 mb-1.5">Date *</label>
                       <div className="relative">
                         <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
                         <input
@@ -280,9 +328,7 @@ export default function BookingForm() {
                       {errors.date && <p className="text-red-500 text-xs mt-1">{errors.date}</p>}
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                        Preferred Time
-                      </label>
+                      <label className="block text-sm font-medium text-slate-700 mb-1.5">Time</label>
                       <select
                         name="time"
                         value={form.time}
@@ -297,11 +343,9 @@ export default function BookingForm() {
                     </div>
                   </div>
 
-                  {/* Message */}
+                  {/* Notes */}
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                      Additional Notes (optional)
-                    </label>
+                    <label className="block text-sm font-medium text-slate-700 mb-1.5">Additional Notes (optional)</label>
                     <textarea
                       name="message"
                       value={form.message}
@@ -312,11 +356,10 @@ export default function BookingForm() {
                     />
                   </div>
 
-                  {/* Submit */}
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-200 hover:shadow-blue-300 transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 text-white font-bold py-4 rounded-xl shadow-lg transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                   >
                     {loading ? (
                       <>
@@ -332,7 +375,7 @@ export default function BookingForm() {
                   </button>
 
                   <p className="text-slate-400 text-xs text-center">
-                    Clicking &quot;Book&quot; will open WhatsApp with your booking details pre-filled.
+                    Clicking &quot;Book&quot; opens WhatsApp with your details pre-filled.
                   </p>
                 </form>
               )}

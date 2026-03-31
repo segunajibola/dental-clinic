@@ -4,42 +4,35 @@ import './globals.css'
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#2563eb',
+  themeColor: '#1d4ed8',
 }
 
 export const metadata: Metadata = {
-  title: 'SmileCraft Dental Clinic | Premium Dental Care in Lekki, Lagos',
+  title: 'All Smiles Dental Clinic | Putting a Smile on your Face | Lekki, Lagos',
   description:
-    'SmileCraft Dental Clinic offers world-class dental services in Lekki, Lagos. Teeth whitening, implants, braces, Invisalign, root canal, and more at affordable prices.',
+    'All Smiles Dental Clinic — established 2016. World-class dental care in Lekki, Lagos. Teeth whitening, implants, braces, Invisalign, veneers, root canal and more. Two branches: Oniru & Chevron.',
   keywords:
-    'dental clinic Lekki Lagos, dentist Lekki, teeth whitening Lagos, dental implants Lagos, braces Lagos, orthodontist Lekki, best dentist Lagos Nigeria',
-  authors: [{ name: 'SmileCraft Dental Clinic' }],
+    'dental clinic Lekki Lagos, dentist Lekki, All Smiles Dental Clinic, teeth whitening Lagos, dental implants Lagos, braces Lagos, orthodontist Lekki, best dentist Lagos Nigeria, Oniru dentist, Chevron dentist, veneers Lagos, root canal Lagos',
+  authors: [{ name: 'All Smiles Dental Clinic' }],
   openGraph: {
-    title: 'SmileCraft Dental Clinic | Premium Dental Care in Lekki, Lagos',
+    title: 'All Smiles Dental Clinic | Putting a Smile on your Face',
     description:
-      'Experience world-class dental care at SmileCraft. Located in Lekki Phase 1, Lagos. Book your appointment today.',
+      'Putting a Smile on your Face since 2016. Experience world-class dental care at All Smiles — Lekki (Oniru) & Chevron, Lagos.',
     type: 'website',
     locale: 'en_NG',
-    siteName: 'SmileCraft Dental Clinic',
+    siteName: 'All Smiles Dental Clinic',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SmileCraft Dental Clinic | Lekki, Lagos',
-    description: 'Premium dental care in the heart of Lekki, Lagos.',
+    title: 'All Smiles Dental Clinic | Lekki, Lagos',
+    description: 'Putting a Smile on your Face. Premium dental care — Oniru & Chevron branches.',
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -48,7 +41,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased font-sans">{children}</body>
     </html>
   )
 }

@@ -15,8 +15,9 @@ const services = [
 
 const quickLinks = [
   { label: 'Home', href: '#home' },
-  { label: 'Services', href: '#services' },
   { label: 'About Us', href: '#about' },
+  { label: 'Services', href: '#services' },
+  { label: 'Our Team', href: '#team' },
   { label: 'Gallery', href: '#gallery' },
   { label: 'Testimonials', href: '#testimonials' },
   { label: 'Book Appointment', href: '#booking' },
@@ -28,14 +29,18 @@ export default function Footer() {
 
   return (
     <footer className="bg-slate-950 text-slate-300">
-      {/* Top promo bar */}
+      {/* Promo bar */}
       <div className="bg-gradient-to-r from-blue-600 to-sky-500 py-3">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-white">
           <p className="text-sm font-medium">
-            🎉 Special discounts available now — Up to 50% OFF selected treatments!
+            🎉 Special discounts now available — Up to 50% OFF selected treatments!
           </p>
           <a
             href="#booking"
+            onClick={(e) => {
+              e.preventDefault()
+              document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })
+            }}
             className="bg-white text-blue-600 font-bold px-4 py-1.5 rounded-full text-sm hover:bg-blue-50 transition-colors whitespace-nowrap"
           >
             Book Now
@@ -45,21 +50,24 @@ export default function Footer() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Brand column */}
+          {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2.5 mb-4">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-sky-500 flex items-center justify-center shadow-lg">
-                <span className="text-white font-black text-lg">S</span>
+                <svg viewBox="0 0 24 24" className="w-6 h-6 text-white" fill="currentColor">
+                  <path d="M12 2C9.243 2 7 4.243 7 7c0 1.357.498 2.594 1.316 3.542L10 17.5c.276 1.105.724 2.5 2 2.5s1.724-1.395 2-2.5l1.684-6.958C16.502 9.594 17 8.357 17 7c0-2.757-2.243-5-5-5z" />
+                </svg>
               </div>
               <div>
-                <span className="font-black text-xl text-white tracking-tight">SmileCraft</span>
-                <p className="text-blue-400 text-xs font-medium leading-none">Dental Clinic</p>
+                <div className="font-black text-xl text-white leading-none">All Smiles</div>
+                <div className="text-blue-400 text-xs font-medium leading-none mt-0.5">Dental Clinic</div>
               </div>
             </div>
-            <p className="text-slate-400 text-sm leading-relaxed mb-5">
-              Premium dental care in the heart of Lekki, Lagos. Transforming smiles with
-              world-class technology and compassionate care since 2012.
+            <p className="text-slate-400 text-sm leading-relaxed mb-3">
+              Putting a Smile on your Face since 2016. World-class dental care at our Oniru and
+              Chevron branches in Lekki, Lagos.
             </p>
+            <p className="text-sky-400 text-xs italic mb-5">"Putting a Smile on your Face"</p>
             <div className="flex gap-3">
               {[
                 { icon: Instagram, href: '#' },
@@ -85,6 +93,10 @@ export default function Footer() {
                 <li key={label}>
                   <a
                     href={href}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+                    }}
                     className="text-slate-400 hover:text-blue-400 text-sm transition-colors duration-200"
                   >
                     {label}
@@ -102,6 +114,10 @@ export default function Footer() {
                 <li key={s}>
                   <a
                     href="#services"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })
+                    }}
                     className="text-slate-400 hover:text-blue-400 text-sm transition-colors duration-200"
                   >
                     {s}
@@ -117,30 +133,37 @@ export default function Footer() {
             <div className="space-y-4">
               <div className="flex gap-3">
                 <MapPin className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
-                <p className="text-slate-400 text-sm">
-                  12 Admiralty Way, Lekki Phase 1,<br />Lagos, Nigeria
-                </p>
+                <div>
+                  <p className="text-slate-300 text-xs font-semibold mb-0.5">Oniru Branch</p>
+                  <p className="text-slate-400 text-xs">7 T.K Kuboye Street, Oniru, Lekki, Lagos</p>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <MapPin className="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="text-slate-300 text-xs font-semibold mb-0.5">Chevron Branch</p>
+                  <p className="text-slate-400 text-xs">Talea Mall, Chevron Drive (Before UBA Bank), Lagos</p>
+                </div>
               </div>
               <div className="flex gap-3">
                 <Phone className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
                 <div>
-                  <a href="tel:+2348100000000" className="text-slate-400 hover:text-blue-400 text-sm block transition-colors">
-                    +234 810 000 0000
+                  <a href="tel:+2349169892921" className="text-slate-400 hover:text-blue-400 text-sm block transition-colors">
+                    09169892921
                   </a>
-                  <a href="tel:+2347010000000" className="text-slate-400 hover:text-blue-400 text-sm transition-colors">
-                    +234 701 000 0000
+                  <a href="tel:+2348183083375" className="text-slate-400 hover:text-blue-400 text-xs transition-colors">
+                    08183083375
                   </a>
                 </div>
               </div>
               <div className="flex gap-3">
                 <Mail className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
-                <a href="mailto:hello@smilecraftdental.ng" className="text-slate-400 hover:text-blue-400 text-sm transition-colors">
-                  hello@smilecraftdental.ng
+                <a href="mailto:ifeosho22@gmail.com" className="text-slate-400 hover:text-blue-400 text-sm transition-colors">
+                  ifeosho22@gmail.com
                 </a>
               </div>
             </div>
 
-            {/* Hours */}
             <div className="mt-5 bg-slate-800/60 rounded-xl p-4">
               <p className="text-white text-xs font-semibold mb-2">Opening Hours</p>
               <p className="text-slate-400 text-xs">Mon – Fri: 8:00 AM – 7:00 PM</p>
@@ -153,10 +176,10 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
+        {/* Bottom */}
         <div className="border-t border-slate-800 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-slate-500 text-sm text-center">
-            © {new Date().getFullYear()} SmileCraft Dental Clinic. All rights reserved. | Lekki, Lagos, Nigeria
+            © {new Date().getFullYear()} All Smiles Dental Clinic. All rights reserved. | Lekki, Lagos, Nigeria
           </p>
           <div className="flex items-center gap-4">
             <span className="text-slate-500 text-xs">Privacy Policy</span>

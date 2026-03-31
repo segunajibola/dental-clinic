@@ -1,11 +1,10 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { MessageCircle } from 'lucide-react'
 
-const WHATSAPP_NUMBER = '2348100000000'
+const WA_NUMBER = '2348100000000'
 
 const services = [
   {
@@ -15,7 +14,7 @@ const services = [
     savings: '₦59,400',
     discountPct: '25% OFF',
     icon: '✨',
-    description: 'Professional-grade whitening for a radiant, confident smile up to 8 shades brighter.',
+    description: 'Professional-grade whitening for a radiant smile up to 8 shades brighter.',
     popular: false,
     category: 'Cosmetic',
   },
@@ -59,7 +58,7 @@ const services = [
     savings: '₦165,000',
     discountPct: '25% OFF',
     icon: '👑',
-    description: 'Durable, porcelain dental crowns that look and feel like natural teeth.',
+    description: 'Durable porcelain dental crowns that look and feel like natural teeth.',
     popular: false,
     category: 'Restorative',
   },
@@ -103,7 +102,7 @@ const services = [
     savings: '₦1,800,000',
     discountPct: '50% OFF',
     icon: '🦷',
-    description: 'Traditional metal or clear braces for perfectly aligned teeth and bite correction.',
+    description: 'Metal or clear braces for perfectly aligned teeth and bite correction.',
     popular: true,
     category: 'Orthodontics',
   },
@@ -114,7 +113,7 @@ const services = [
     savings: null,
     discountPct: null,
     icon: '💎',
-    description: 'Ultra-thin porcelain veneers for a flawless Hollywood smile with Invisalign alignment.',
+    description: 'Ultra-thin porcelain veneers for a flawless Hollywood smile.',
     popular: false,
     category: 'Cosmetic',
   },
@@ -125,17 +124,39 @@ const services = [
     savings: '₦200,000',
     discountPct: '31% OFF',
     icon: '⚡',
-    description: 'Removable snap-on veneers for an instant smile transformation without permanent alterations.',
+    description: 'Removable veneers for an instant smile transformation — no drilling.',
     popular: false,
     category: 'Cosmetic',
   },
+  {
+    name: 'Routine Extraction',
+    originalPrice: null,
+    discountedPrice: '₦160,000',
+    savings: null,
+    discountPct: null,
+    icon: '🦷',
+    description: 'Safe and comfortable removal of damaged or problematic teeth.',
+    popular: false,
+    category: 'Oral Surgery',
+  },
+  {
+    name: 'Surgical Extraction',
+    originalPrice: null,
+    discountedPrice: '₦249,780',
+    savings: null,
+    discountPct: null,
+    icon: '🔧',
+    description: 'Complex tooth removal including impacted wisdom teeth — done with precision.',
+    popular: false,
+    category: 'Oral Surgery',
+  },
 ]
 
-function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
+function ServiceCard({ service, index }: { service: (typeof services)[0]; index: number }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
-  const waMessage = encodeURIComponent(
-    `Hello! I'm interested in booking a ${service.name} appointment at SmileCraft Dental Clinic. The discounted price is ${service.discountedPrice}. Can you confirm availability?`
+  const waMsg = encodeURIComponent(
+    `Hello! I'm interested in booking *${service.name}* at All Smiles Dental Clinic. The price is ${service.discountedPrice}. Please confirm availability.`
   )
 
   return (
@@ -143,12 +164,11 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.07 }}
+      transition={{ duration: 0.5, delay: index * 0.06 }}
       className={`relative group bg-white rounded-3xl border-2 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col ${
         service.popular ? 'border-blue-500 shadow-blue-100' : 'border-slate-100'
       }`}
     >
-      {/* Popular badge */}
       {service.popular && (
         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
           <span className="bg-gradient-to-r from-blue-600 to-sky-500 text-white text-xs font-bold px-4 py-1 rounded-full shadow-lg whitespace-nowrap">
@@ -157,7 +177,6 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
         </div>
       )}
 
-      {/* Discount badge */}
       {service.discountPct && (
         <div className="absolute top-4 right-4 z-10">
           <span className="bg-red-500 text-white text-xs font-black px-2.5 py-1.5 rounded-xl shadow-md">
@@ -166,7 +185,6 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
         </div>
       )}
 
-      {/* Card top gradient */}
       <div
         className={`h-2 w-full ${
           service.popular
@@ -176,22 +194,19 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
       />
 
       <div className="p-6 flex flex-col flex-1">
-        {/* Category */}
         <span className="text-xs font-semibold text-blue-500 uppercase tracking-wider mb-3">
           {service.category}
         </span>
 
-        {/* Icon + Name */}
         <div className="flex items-start gap-3 mb-3">
           <span className="text-3xl">{service.icon}</span>
           <h3 className="text-lg font-bold text-slate-900 leading-tight">{service.name}</h3>
         </div>
 
-        <p className="text-slate-500 text-sm leading-relaxed mb-6 flex-1">{service.description}</p>
+        <p className="text-slate-500 text-sm leading-relaxed mb-5 flex-1">{service.description}</p>
 
-        {/* Pricing */}
         <div className="mb-5">
-          {service.savings && (
+          {service.originalPrice && (
             <div className="text-xs font-medium text-slate-400 line-through mb-0.5">
               Was {service.originalPrice}
             </div>
@@ -206,9 +221,8 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
           </div>
         </div>
 
-        {/* Book Now button */}
         <a
-          href={`https://wa.me/${WHATSAPP_NUMBER}?text=${waMessage}`}
+          href={`https://wa.me/${WA_NUMBER}?text=${waMsg}`}
           target="_blank"
           rel="noopener noreferrer"
           className={`flex items-center justify-center gap-2 w-full py-3 rounded-xl font-semibold text-sm transition-all duration-200 hover:-translate-y-0.5 ${
@@ -232,7 +246,6 @@ export default function Services() {
   return (
     <section id="services" className="py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
@@ -241,7 +254,7 @@ export default function Services() {
           className="text-center mb-16"
         >
           <span className="inline-block bg-blue-50 text-blue-600 text-sm font-semibold px-4 py-2 rounded-full mb-4 uppercase tracking-wider">
-            Our Services
+            Our Services & Pricing
           </span>
           <h2 className="text-4xl sm:text-5xl font-black text-slate-900 mb-4">
             World-Class Dental{' '}
@@ -250,19 +263,17 @@ export default function Services() {
             </span>
           </h2>
           <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-            All services are now available at special discounted prices. Book today and save big on
-            your journey to a perfect smile.
+            Special discounted prices — limited time only. Book today and save big on your
+            journey to a perfect smile.
           </p>
         </motion.div>
 
-        {/* Cards grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {services.map((service, i) => (
             <ServiceCard key={service.name} service={service} index={i} />
           ))}
         </div>
 
-        {/* Bottom CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -273,6 +284,10 @@ export default function Services() {
           <p className="text-slate-500 mb-4">Not sure which service you need?</p>
           <a
             href="#booking"
+            onClick={(e) => {
+              e.preventDefault()
+              document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })
+            }}
             className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-sky-500 text-white font-bold px-8 py-4 rounded-2xl shadow-lg shadow-blue-200 hover:shadow-blue-300 hover:-translate-y-1 transition-all duration-200"
           >
             Book a Free Consultation

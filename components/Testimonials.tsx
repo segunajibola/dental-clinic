@@ -1,7 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react'
 
@@ -13,7 +12,7 @@ const testimonials = [
     rating: 5,
     service: 'Teeth Whitening',
     review:
-      'I walked in feeling self-conscious about my smile and left absolutely beaming! The team at SmileCraft is professional, gentle, and incredibly skilled. My teeth are now 8 shades whiter. Worth every naira!',
+      'I walked in feeling self-conscious and left absolutely beaming! The team at All Smiles is professional, gentle, and skilled. My teeth are now 8 shades whiter. Worth every naira!',
     avatar: 'AO',
     color: 'from-pink-400 to-rose-500',
     verified: true,
@@ -25,7 +24,7 @@ const testimonials = [
     rating: 5,
     service: 'Dental Implants',
     review:
-      'After losing a tooth in an accident, I was devastated. SmileCraft gave me back my confidence with a perfect implant. The procedure was painless and the results look completely natural. Highly recommend!',
+      'After losing a tooth, I was devastated. All Smiles gave me back my confidence with a perfect implant. The procedure was painless and the result looks completely natural. Highly recommend!',
     avatar: 'CE',
     color: 'from-blue-400 to-blue-600',
     verified: true,
@@ -37,7 +36,7 @@ const testimonials = [
     rating: 5,
     service: 'Braces',
     review:
-      'As a healthcare professional, I have high standards. SmileCraft exceeded them all. My daughter\'s braces treatment was exceptional — professional, on schedule, and the results are perfect. The staff truly care.',
+      "As a healthcare professional, I have high standards. All Smiles exceeded them all. My daughter's braces treatment was exceptional — professional, on schedule, and results are perfect.",
     avatar: 'FA',
     color: 'from-purple-400 to-purple-600',
     verified: true,
@@ -49,7 +48,7 @@ const testimonials = [
     rating: 5,
     service: 'Root Canal',
     review:
-      'I was terrified of getting a root canal but the team made it completely painless. I had zero discomfort during or after the procedure. The price was also much more affordable than other clinics I quoted.',
+      'I was terrified of getting a root canal but the team made it completely painless. Zero discomfort during or after. The price was also much more affordable than other clinics I quoted.',
     avatar: 'TB',
     color: 'from-emerald-400 to-green-500',
     verified: true,
@@ -59,9 +58,9 @@ const testimonials = [
     name: 'Ngozi Amadi',
     role: 'Banker, Chevron Drive',
     rating: 5,
-    service: 'Porcelain Veneers',
+    service: 'Snap-on Veneers',
     review:
-      'I finally got the smile I\'ve always dreamed of. The veneers look so natural — nobody can tell they\'re not my real teeth! SmileCraft transformed my appearance and my self-confidence completely.',
+      "I finally got the smile I've always dreamed of. The veneers look so natural — nobody can tell! All Smiles transformed my appearance and my self-confidence completely.",
     avatar: 'NA',
     color: 'from-sky-400 to-cyan-500',
     verified: true,
@@ -73,7 +72,7 @@ const testimonials = [
     rating: 5,
     service: 'Scaling & Polishing',
     review:
-      'Best dental experience I\'ve ever had in Lagos. Clean facility, friendly staff, and my teeth feel incredibly clean and smooth. The pricing is transparent and fair. This is now my permanent dentist.',
+      "Best dental experience I've ever had in Lagos. Clean facility, friendly staff, and my teeth feel incredibly clean. Pricing is transparent and fair. This is now my permanent dentist.",
     avatar: 'BW',
     color: 'from-orange-400 to-amber-500',
     verified: true,
@@ -101,13 +100,11 @@ export default function Testimonials() {
 
   const prev = () => setCurrent((c) => Math.max(0, c - perPage))
   const next = () => setCurrent((c) => Math.min(testimonials.length - perPage, c + perPage))
-
   const visible = testimonials.slice(current, current + perPage)
 
   return (
     <section id="testimonials" className="py-24 bg-slate-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
@@ -125,21 +122,19 @@ export default function Testimonials() {
             </span>
           </h2>
           <p className="text-slate-400 text-lg max-w-xl mx-auto">
-            Over 5,000 patients have trusted SmileCraft with their smiles. Here is what they have
-            to say about their experience.
+            Over 5,000 patients have trusted All Smiles Dental Clinic. Here is what they say
+            about their experience.
           </p>
 
-          {/* Overall rating */}
           <div className="flex items-center justify-center gap-2 mt-6">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="w-6 h-6 text-yellow-400 fill-yellow-400" />
             ))}
             <span className="text-white font-bold text-xl ml-1">4.9</span>
-            <span className="text-slate-400">(312 verified reviews)</span>
+            <span className="text-slate-400">(500+ verified reviews)</span>
           </div>
         </motion.div>
 
-        {/* Testimonial cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
           {visible.map((t, i) => (
             <motion.div
@@ -149,9 +144,7 @@ export default function Testimonials() {
               transition={{ duration: 0.4, delay: i * 0.1 }}
               className="bg-slate-800/60 backdrop-blur-sm border border-slate-700/60 rounded-3xl p-6 hover:border-blue-500/30 hover:bg-slate-800 transition-all duration-300 flex flex-col"
             >
-              {/* Quote icon */}
               <Quote className="w-8 h-8 text-blue-500/40 mb-4" />
-
               <p className="text-slate-300 leading-relaxed mb-6 flex-1 text-sm">{t.review}</p>
 
               <div className="border-t border-slate-700/60 pt-4">
@@ -180,7 +173,6 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Navigation */}
         <div className="flex items-center justify-center gap-4">
           <button
             onClick={prev}
